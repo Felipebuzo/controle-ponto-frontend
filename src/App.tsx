@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import BaterPonto from "./pages/BaterPonto";
 import Historico from "./pages/Historico";
 import SolicitarAjuste from "./pages/SolicitarAjuste";
+import GestorPendentes from "./pages/GestorPendentes";
 import Layout from "./pages/Layout";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/ponto" element={<BaterPonto />} />
           <Route path="/historico" element={<Historico />} />
           <Route path="/solicitar-ajuste" element={<SolicitarAjuste />} />
+          <Route path="/gestor/pendentes" element={<GestorPendentes />} />
         </Route>
 
         <Route path="/" element={<Navigate to="/login" />} />
