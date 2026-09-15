@@ -1,75 +1,54 @@
-# React + TypeScript + Vite
+# Controle de Ponto/Escala — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface web para o sistema de controle de ponto e escala com fluxo de aprovação, desenvolvida em React + TypeScript.
 
-Currently, two official plugins are available:
+> Backend deste projeto: [controle-ponto](https://github.com/Felipebuzo/controle-ponto)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Sobre o projeto
 
-## React Compiler
+Consome a API REST do backend para permitir que funcionários registrem ponto e solicitem ajustes, e que gestores aprovem ou rejeitem essas solicitações — tudo através de uma interface autenticada por token JWT.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- Login com autenticação via JWT (token persistido no `localStorage`)
+- Área do funcionário: bater ponto, consultar histórico, solicitar ajuste de ponto
+- Área do gestor: listar solicitações pendentes, aprovar ou rejeitar
+- Navegação entre telas via React Router, com estado de autenticação compartilhado via Context API
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tecnologias
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React
+- TypeScript
+- Vite
+- React Router DOM
+- Axios
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Arquitetura
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `pages` — telas da aplicação (Login, BaterPonto, Historico, SolicitarAjuste, GestorPendentes, Layout)
+- `contexts` — `AuthContext`, gerenciando o usuário logado e as ações de login/logout
+- `services` — cliente HTTP (Axios) configurado com interceptor que anexa o token JWT automaticamente em cada requisição
+- `types` — interfaces TypeScript espelhando os modelos de dados do backend
 
-```
+## Como rodar o projeto
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### Pré-requisitos
+- Node.js
+- O [backend](https://github.com/Felipebuzo/controle-ponto) rodando em `http://localhost:8080`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Passos
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone o repositório
+2. Instale as dependências:
 
-```
+npm install
+
+3. Rode o servidor de desenvolvimento:
+
+npm run dev
+
+4. Acesse `http://localhost:5173`
+
+## Autor
+
+Felipe Buzo — [GitHub](https://github.com/Felipebuzo)
